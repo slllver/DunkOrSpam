@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/slllver/DunkOrSpam#readme",
   "dependencies": {
-    "fs": "^0.0.1-security",
     "ws": "^8.17.0"
   }
 }

@@ -37,8 +37,6 @@ function loadConfig(_callback) {
 function registerSocket() {
     socket = new WebSocket('wss://irc-ws.chat.twitch.tv:443')
 
-    console.log('A')
-
     socket.on('open', () => {
         console.log('Socket opened B');
         socket.send(`PASS ${oAuth}`);
