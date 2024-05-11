@@ -1,0 +1,24 @@
+{
+  "name": "untitled",
+  "version": "1.0.0",
+  "description": "DunkOrSpam bot for spamming dnkM when someone subscribes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Silver",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slllver/DunkOrSpam.git"
+  },
+  "bugs": {
+    "url": "https://github.com/slllver/DunkOrSpam/issues"
+  },
+  "homepage": "https://github.com/slllver/DunkOrSpam#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "ws": "^8.17.0"
+  }
+}
