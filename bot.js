@@ -82,8 +82,10 @@ async function queueMessage() {
     }
 
     messageQueued = true;
+    let delay = random(minimum, maximum) * 1000;
 
-    await setTimeout(random(minimum, maximum));
+    console.log(`Queued message with ${delay} ms of delay`);
+    await setTimeout(delay, delay);
 
     socket.send(`PRIVMSG #${channel} :${messages[lastIndex]}`);
     lastIndex = (lastIndex + 1 > messages.length) ? lastIndex + 1 : 0;
