@@ -2,7 +2,8 @@ let edge = require('edge-js')
 
 module.exports = {
     getHandle,
-    flashWindow
+    flashWindow,
+    getScrollPos
 }
 
 let flash = edge.func({
@@ -14,6 +15,12 @@ let flash = edge.func({
 let handle = edge.func({
     assemblyFile: 'WindowUtils.dll',
     typeName: 'WindowUtils.Handle',
+    methodName: 'Invoke'
+});
+
+let scroll = edge.func({
+    assemblyFile: 'WindowUtils.dll',
+    typeName: 'WindowUtils.Scroll',
     methodName: 'Invoke'
 });
 
@@ -39,6 +46,22 @@ function flashWindow(handle, timeout, count) {
     flash(wPayload, (error) => {
         if (error) throw error;
     });
+}
+
+function getScrollPos(handle) {
+    let sPayload = {
+        hwnd: handle
+    }
+
+    let nPos;
+
+    scroll(sPayload, (error, result) => {
+        if (error) throw error;
+
+        nPos = result;
+    });
+
+    return nPos;
 }
 
 function sleep(ms) {
