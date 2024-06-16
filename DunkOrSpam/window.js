@@ -6,14 +6,14 @@ module.exports = {
 }
 
 let flash = edge.func({
-    assemblyFile: 'FlashWindow.dll',
-    typeName: 'FlashWindow.Window',
+    assemblyFile: 'WindowUtils.dll',
+    typeName: 'WindowUtils.Flash',
     methodName: 'Invoke'
 });
 
 let handle = edge.func({
-    assemblyFile: 'FlashWindow.dll',
-    typeName: 'FlashWindow.Handle',
+    assemblyFile: 'WindowUtils.dll',
+    typeName: 'WindowUtils.Handle',
     methodName: 'Invoke'
 });
 
