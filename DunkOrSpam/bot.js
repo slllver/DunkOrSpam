@@ -54,7 +54,7 @@ function registerSocket() {
     socket = new WebSocket('wss://irc-ws.chat.twitch.tv:443')
 
     socket.on('open', () => {
-        console.log('Socket opened B');
+        console.log('Socket opened');
         socket.send(`PASS ${config.oAuth}`);
         socket.send(`NICK ${config.nick}`);
         socket.send(`JOIN #${config.channel}`);
@@ -70,17 +70,17 @@ function registerSocket() {
 
         if (message.author === '') {
             return;
+        } else if (message.channel !== config.channel) {
+            console.log('ERROR: Channel changed. Shutting down'); // Is this even possible?
+            process.exit(1);
         }
 
         if (message.author === 'wizebot' && ev.includes('⭐️')) {
-            console.log('-------------------------------------------')
-            console.log('')
-            console.log('AYO NEW SUB JUST DROPPED')
-            console.log('')
-            console.log('-------------------------------------------')
+            console.log('New subscriber message found, queueing message...')
 
             queueMessage(); // Don't care about promise lmao
-        } else if (message.author !== config.nick && message.body.toLowerCase().includes(`${config.nick}`)) {
+        } else if (message.author !== config.nick && message.author !== 'dunkbot' && message.body.toLowerCase().includes(`${config.nick}`)) { // Also ignore pings from dunkbot because nobody cares
+            // TODO: Ping exclusions should be configurable rather than hardcoded
             flashWindow(hwnd, 150, 10);
             console.log(`\x1b[90m${new Date().toLocaleTimeString()} \x1b[32m${message.author}\x1b[0m: \x1b[43m${message.body}\x1b[0m`);
 

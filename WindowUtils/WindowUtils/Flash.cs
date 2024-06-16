@@ -5,7 +5,7 @@ namespace WindowUtils;
 public class Flash {
 	
 	[StructLayout(LayoutKind.Sequential)]
-	public struct FLASHWINFO {
+	private struct FLASHWINFO {
 		public UInt32 cbSize;
 		public IntPtr hwnd;
 		public UInt32 dwFlags;

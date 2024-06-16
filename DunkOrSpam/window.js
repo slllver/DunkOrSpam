@@ -41,12 +41,8 @@ function flashWindow(handle, timeout, count) {
     });
 }
 
-let hwnd;
-
 function sleep(ms) {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
 }
-
-getHandle('DunkOrSpam', (res) => hwnd = res);
