@@ -19,7 +19,9 @@ class List {
         return this.tail;
     }
 
-    append(item) {
+    append(data) {
+        let item = new Item(data);
+
         if (this.count === 0) {
             this.head = item;
             this.tail = item;

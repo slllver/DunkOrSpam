@@ -87,7 +87,7 @@ function writeLog(text) {
 }
 
 function queueMessage(text) {
-    list.append(new Item(text));
+    list.append(text);
 }
 
 function printQueue() {
