@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/slllver/DunkOrSpam#readme",
   "dependencies": {
+    "edge-js": "^22.1.2",
     "ws": "^8.17.0"
   }
 }
