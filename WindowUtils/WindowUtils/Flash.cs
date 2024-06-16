@@ -34,7 +34,7 @@ public class Flash {
 
 	[DllImport("user32.dll")]
 	[return: MarshalAs(UnmanagedType.Bool)]
-	static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
+	private static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
 
 	private static bool FlashWindow(IntPtr handle, UInt32 timeout, UInt32 count) {
 		IntPtr hWnd = handle;

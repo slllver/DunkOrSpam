@@ -1,6 +1,7 @@
 const { setTimeout } = require('timers/promises');
 const WebSocket = require('ws');
-const { getHandle, flashWindow } = require('./window.js')
+const { getHandle, flashWindow } = require('./window.js');
+const logger = require('./logging.js');
 
 const messagePattern = /:([a-z0-9_]{4,25})!\1@\1\.tmi\.twitch\.tv ([A-Z]+) #([a-z0-9_]{4,25}) :(.+)/;
 
@@ -20,7 +21,10 @@ let messageQueued = false;
 let hwnd;
 
 loadConfig(config, registerSocket);
-getHandle('DunkOrSpam', (res) => hwnd = res);
+getHandle('DunkOrSpam', (res) => {
+    hwnd = res;
+    logger.init(hwnd);
+});
 
 // console.log(config.oAuth)
 console.log(config.nick)
@@ -82,12 +86,12 @@ function registerSocket() {
         } else if (message.author !== config.nick && message.author !== 'dunkbot' && message.body.toLowerCase().includes(`${config.nick}`)) { // Also ignore pings from dunkbot because nobody cares
             // TODO: Ping exclusions should be configurable rather than hardcoded
             flashWindow(hwnd, 150, 10);
-            console.log(`\x1b[90m${new Date().toLocaleTimeString()} \x1b[32m${message.author}\x1b[0m: \x1b[43m${message.body}\x1b[0m`);
+            logger.log(`\x1b[32m${message.author}\x1b[0m: \x1b[43m${message.body}\x1b[0m`);
 
             return;
         }
 
-        console.log(`\x1b[90m${new Date().toLocaleTimeString()} \x1b[32m${message.author}\x1b[0m: ${message.body}\x1b[0m`);
+        logger.log(`\x1b[32m${message.author}\x1b[0m: ${message.body}`)
     });
 }
 
@@ -99,7 +103,7 @@ async function queueMessage() { // Why is this async?
     messageQueued = true;
     let delay = random(config.minimum, config.maximum) * 1000;
 
-    console.log(`Queued message with ${delay} ms of delay`);
+    logger.log(`Queued message with ${delay} ms of delay`);
     await setTimeout(delay, delay);
 
     socket.send(`PRIVMSG #${config.channel} :${config.messages[lastIndex]}`);
